@@ -89,4 +89,11 @@ async function doSearch(query: string, type: string, pageNum: number) {
     }
   }
 
+    function handlePageChange(newPage: number) {
+    setPage(newPage);
+    doSearch(currentQuery, currentType, newPage);
+    window.scrollTo({ top: 0 });
+  }
+
+
 }
