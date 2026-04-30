@@ -37,3 +37,31 @@ export interface SearchParams {
   limit?: number;
   offset?: number;
 }
+export async function searchBooks(params: SearchParams): Promise<OpenLibrarySearchResponse> {
+  const queryConfig = [
+    { name: "q", value: params.q },
+    { name: "title", value: params.title },
+    { name: "author", value: params.author },
+    { name: "publish_year_min", value: params.minYear },
+    { name: "publish_year_max", value: params.maxYear },
+    { name: "language", value: params.language },
+    { name: "sort", value: params.sort },
+    { name: "limit", value: params.limit },
+    { name: "offset", value: params.offset },
+  ];
+  let parts: string[] = [];
+  queryConfig.forEach((item) => {
+    if (item.value !== undefined && item.value !== "") {
+      parts.push(`${item.name}=${encodeURIComponent(String(item.value))}`);
+    }
+  });
+  if (!params.q && !params.title && !params.author) {
+    parts.push("q=");
+  }
+  const url = `${BASE_URL}/search.json?${parts.join("&")}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error("Error al buscar libros: " + response.statusText);
+  }
+  return response.json();
+}
