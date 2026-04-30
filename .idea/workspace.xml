@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c6ee50d-c81b-4174-8900-494b035b5f1c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/ErrorMessage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/Loading.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/Navbar.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/utils/storage.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/App.tsx" afterDir="false" />
@@ -85,7 +88,7 @@
       <workItem from="1777477187140" duration="1752000" />
       <workItem from="1777500098724" duration="1469000" />
       <workItem from="1777556378549" duration="1178000" />
-      <workItem from="1777557588786" duration="8072000" />
+      <workItem from="1777557588786" duration="9017000" />
     </task>
     <servers />
   </component>
