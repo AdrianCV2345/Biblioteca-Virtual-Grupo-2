@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c6ee50d-c81b-4174-8900-494b035b5f1c" name="Changes" comment="" />
+    <list default="true" id="7c6ee50d-c81b-4174-8900-494b035b5f1c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/Navbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/utils/storage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/BookCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/BookCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/About.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/About.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/BookDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/BookDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Favorites.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Favorites.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/services/openLibraryService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/services/openLibraryService.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,7 +32,7 @@
     </persistenceIdMap>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0,
@@ -27,28 +43,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/USUARIO/Documents/DelRocío/QuintoSemestre/TecnologiasWebII/ProyectoGrupal",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/USUARIO/Documents/DelRocío/QuintoSemestre/TecnologiasWebII/ProyectoGrupal&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\USUARIO\\Documents\\DelRocío\\QuintoSemestre\\TecnologiasWebII\\ProyectoGrupal\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -66,7 +84,7 @@
       <workItem from="1777477187140" duration="1752000" />
       <workItem from="1777500098724" duration="1469000" />
       <workItem from="1777556378549" duration="1178000" />
-      <workItem from="1777557588786" duration="1682000" />
+      <workItem from="1777557588786" duration="7777000" />
     </task>
     <servers />
   </component>
