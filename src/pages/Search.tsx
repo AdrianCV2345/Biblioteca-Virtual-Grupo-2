@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import FilterPanel from "@/components/FilterPanel";
 import { searchBooks, getCoverUrl, OpenLibraryBook } from "@/services/openLibraryService";
@@ -9,6 +12,14 @@ interface FilterOptions {
   language: string;
   author: string;
   sortBy: string;
+}
+
+function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return "Error al buscar libros";
 }
 
 export default function SearchPage() {
@@ -36,7 +47,17 @@ async function doSearch(query: string, type: string, pageNum: number) {
     try {
       const offset = (pageNum - 1) * 20;
 
-      let params: any = { limit: 20, offset };
+      const params: {
+        limit: number;
+        offset: number;
+        q?: string;
+        title?: string;
+        author?: string;
+        minYear?: number;
+        maxYear?: number;
+        language?: string;
+        sort?: string;
+      } = { limit: 20, offset };
 
       if (type === "title") {
         params.title = query;
@@ -67,8 +88,8 @@ async function doSearch(query: string, type: string, pageNum: number) {
       setResults(response.docs);
       setTotalResults(response.numFound);
       setSearchTriggered(true);
-    } catch (err: any) {
-      setError(err.message || "Error al buscar libros");
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
       setResults([]);
     } finally {
       setLoading(false);
@@ -159,7 +180,7 @@ async function doSearch(query: string, type: string, pageNum: number) {
                   {results.map((book) => {
                     const workId = book.key.replace("/works/", "");
                     return (
-                      <a
+                      <Link
                         key={book.key}
                         href={`/libro/${workId}`}
                         className="block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
@@ -193,7 +214,7 @@ async function doSearch(query: string, type: string, pageNum: number) {
                             )}
                           </div>
                         </div>
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
