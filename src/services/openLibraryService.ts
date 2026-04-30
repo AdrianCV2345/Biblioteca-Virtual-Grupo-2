@@ -83,3 +83,8 @@ export async function getBookDetail(workId: string) {
 
   return response.json();
 }
+
+export function getCoverUrl(coverId: number | undefined, size: string = "M"): string {
+  if (!coverId) return "";
+  return `https://covers.openlibrary.org/b/id/${coverId}-${size}.jpg`;
+}
