@@ -20,6 +20,44 @@ export interface OpenLibraryBook {
   public_scan_b?: boolean;
 }
 
+export interface OpenLibraryWorkAuthor {
+  author?: {
+    key: string;
+  };
+  type?: {
+    key: string;
+  };
+}
+
+export interface OpenLibraryWorkDetail {
+  key: string;
+  title: string;
+  description?: string | { value?: string };
+  covers?: number[];
+  subjects?: string[];
+  subject_places?: string[];
+  subject_people?: string[];
+  subject_times?: string[];
+  authors?: OpenLibraryWorkAuthor[];
+  links?: Array<{
+    title?: string;
+    url?: string;
+    type?: {
+      key?: string;
+    };
+  }>;
+  first_publish_date?: string;
+  created?: {
+    value?: string;
+  };
+}
+
+export interface OpenLibraryAuthorDetail {
+  key: string;
+  name?: string;
+  personal_name?: string;
+}
+
 export interface OpenLibrarySearchResponse {
   numFound: number;
   start: number;
@@ -49,7 +87,7 @@ export async function searchBooks(params: SearchParams): Promise<OpenLibrarySear
     { name: "limit", value: params.limit },
     { name: "offset", value: params.offset },
   ];
-  let parts: string[] = [];
+  const parts: string[] = [];
   queryConfig.forEach((item) => {
     if (item.value !== undefined && item.value !== "") {
       parts.push(`${item.name}=${encodeURIComponent(String(item.value))}`);
@@ -76,6 +114,17 @@ export async function searchByAuthor(author: string, extra?: Omit<SearchParams, 
 
 export async function getBookDetail(workId: string) {
   const response = await fetch(`${BASE_URL}/works/${workId}.json`);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return response.json();
+}
+
+export async function getAuthorDetail(authorKey: string): Promise<OpenLibraryAuthorDetail | null> {
+  const cleanAuthorKey = authorKey.replace(/^\//, "");
+  const response = await fetch(`${BASE_URL}/${cleanAuthorKey}.json`);
 
   if (!response.ok) {
     return null;
