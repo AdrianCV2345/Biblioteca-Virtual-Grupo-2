@@ -1,5 +1,10 @@
 import HomePage from "@/pages/Home";
+import Main from "@/main";
 
 export default function Page() {
-  return <HomePage />;
+  return (
+    <Main>
+      <HomePage />
+    </Main>
+  );
 }
