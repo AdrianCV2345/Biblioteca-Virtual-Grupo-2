@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c6ee50d-c81b-4174-8900-494b035b5f1c" name="Changes" comment="" />
+    <list default="true" id="7c6ee50d-c81b-4174-8900-494b035b5f1c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/components/BookCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/pages/Home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/services/openLibraryService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,7 +24,7 @@
     </persistenceIdMap>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Biblioteca-Virtual-Grupo-2" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0,
@@ -37,6 +45,7 @@
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "C:/Users/USUARIO/Documents/DelRocío/QuintoSemestre/TecnologiasWebII/ProyectoGrupal",
     "node.js.detected.package.eslint": "true",
@@ -46,6 +55,7 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\USUARIO\\Documents\\DelRocío\\QuintoSemestre\\TecnologiasWebII\\ProyectoGrupal\\Biblioteca-Virtual-Grupo-2\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,7 +76,7 @@
       <workItem from="1777477187140" duration="1752000" />
       <workItem from="1777500098724" duration="1469000" />
       <workItem from="1777556378549" duration="1178000" />
-      <workItem from="1777557588786" duration="1682000" />
+      <workItem from="1777557588786" duration="6107000" />
     </task>
     <servers />
   </component>
