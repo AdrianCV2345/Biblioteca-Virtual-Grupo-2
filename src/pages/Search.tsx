@@ -81,5 +81,12 @@ async function doSearch(query: string, type: string, pageNum: number) {
     doSearch(query, type, 1);
   }
 
+    function handleFilterChange(newFilters: FilterOptions) {
+    setFilters(newFilters);
+    if (currentQuery) {
+      doSearch(currentQuery, currentType, 1);
+      setPage(1);
+    }
+  }
 
 }
