@@ -155,7 +155,6 @@ async function doSearch(query: string, type: string, pageNum: number) {
               </div>
             ) : (
               <>
-                {/* === COMMIT 22: agregar grid de resultados con BookCard inline === */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {results.map((book) => {
                     const workId = book.key.replace("/works/", "");
@@ -199,7 +198,7 @@ async function doSearch(query: string, type: string, pageNum: number) {
                   })}
                 </div>
 
-                {/* === COMMIT 23: agregar paginación (Anterior / Siguiente) === */}
+              
                 {totalPages > 1 && (
                   <div className="mt-8 flex justify-center items-center gap-2">
                     <button
