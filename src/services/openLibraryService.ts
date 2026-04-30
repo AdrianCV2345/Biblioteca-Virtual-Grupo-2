@@ -73,3 +73,13 @@ export async function searchByTitle(title: string, extra?: Omit<SearchParams, "t
 export async function searchByAuthor(author: string, extra?: Omit<SearchParams, "author">): Promise<OpenLibrarySearchResponse> {
   return searchBooks({ author, ...extra });
 }
+
+export async function getBookDetail(workId: string) {
+  const response = await fetch(`${BASE_URL}/works/${workId}.json`);
+
+  if (!response.ok) {
+    return null;
+  }
+
+  return response.json();
+}
