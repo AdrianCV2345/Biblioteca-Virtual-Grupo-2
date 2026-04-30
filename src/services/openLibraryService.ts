@@ -88,3 +88,8 @@ export function getCoverUrl(coverId: number | undefined, size: string = "M"): st
   if (!coverId) return "";
   return `https://covers.openlibrary.org/b/id/${coverId}-${size}.jpg`;
 }
+
+
+export function getWorkIdFromKey(key: string): string {
+  return key.replace("/works/", "");
+}
