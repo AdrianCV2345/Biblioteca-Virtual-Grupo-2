@@ -69,3 +69,7 @@ export async function searchBooks(params: SearchParams): Promise<OpenLibrarySear
 export async function searchByTitle(title: string, extra?: Omit<SearchParams, "title">): Promise<OpenLibrarySearchResponse> {
   return searchBooks({ title, ...extra });
 }
+
+export async function searchByAuthor(author: string, extra?: Omit<SearchParams, "author">): Promise<OpenLibrarySearchResponse> {
+  return searchBooks({ author, ...extra });
+}
