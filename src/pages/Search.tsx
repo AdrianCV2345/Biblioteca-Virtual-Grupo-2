@@ -74,5 +74,12 @@ async function doSearch(query: string, type: string, pageNum: number) {
       setLoading(false);
     }
   }
+   function handleSearch(query: string, type: string) {
+    setCurrentQuery(query);
+    setCurrentType(type);
+    setPage(1);
+    doSearch(query, type, 1);
+  }
+
 
 }
