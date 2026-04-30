@@ -25,3 +25,15 @@ export interface OpenLibrarySearchResponse {
   start: number;
   docs: OpenLibraryBook[];
 }
+
+export interface SearchParams {
+  q?: string;
+  title?: string;
+  author?: string;
+  minYear?: number;
+  maxYear?: number;
+  language?: string;
+  sort?: string;
+  limit?: number;
+  offset?: number;
+}
