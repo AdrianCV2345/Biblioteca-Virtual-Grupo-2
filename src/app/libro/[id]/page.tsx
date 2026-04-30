@@ -1,4 +1,5 @@
 import BookDetailPage from "@/pages/BookDetail";
+import Main from "@/main";
 
 interface PageProps {
   params: Promise<{
@@ -8,5 +9,9 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
-  return <BookDetailPage workId={id} />;
+  return (
+    <Main>
+      <BookDetailPage workId={id} />
+    </Main>
+  );
 }
