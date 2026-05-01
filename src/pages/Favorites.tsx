@@ -54,7 +54,7 @@ export default function FavoritesPage() {
           >
             ← Volver
           </Link>
-          <h1 className="text-3xl font-bold">❤️ Mis Favoritos</h1>
+          <h1 className="text-3xl font-bold"> Mis Favoritos</h1>
           {favorites.length > 0 && (
             <span className="ml-auto rounded-full bg-rose-100 px-3 py-1 text-sm font-medium text-rose-700">
               {favorites.length} libro{favorites.length !== 1 ? "s" : ""}
@@ -65,7 +65,7 @@ export default function FavoritesPage() {
         {/* Empty State */}
         {favorites.length === 0 ? (
           <div className="rounded-3xl border border-stone-200 bg-white p-12 text-center shadow-sm">
-            <p className="text-4xl mb-4">📚</p>
+            <p className="text-4xl mb-4"></p>
             <h2 className="text-2xl font-semibold text-stone-900 mb-2">
               Sin favoritos aún
             </h2>
@@ -97,7 +97,7 @@ export default function FavoritesPage() {
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center bg-stone-200">
-                      <span className="text-4xl">📖</span>
+                      <span className="text-4xl"></span>
                     </div>
                   )}
                 </div>
@@ -120,20 +120,20 @@ export default function FavoritesPage() {
                   )}
 
                   {book.year && (
-                    <p className="text-xs text-stone-500 mt-1">📅 {book.year}</p>
+                    <p className="text-xs text-stone-500 mt-1"> {book.year}</p>
                   )}
 
                   {/* Botones */}
                   <div className="mt-4 flex gap-2">
                     <Link
                       href={`/libro/${book.workId}`}
-                      className="flex-1 rounded-full bg-stone-900 px-3 py-2 text-center text-xs font-medium text-white transition hover:bg-stone-800"
+                      className="ui-btn ui-btn--primary flex-1 text-center"
                     >
                       Ver detalle
                     </Link>
                     <button
                       onClick={() => handleRemoveFavorite(book.workId)}
-                      className="flex-1 rounded-full border border-rose-300 bg-rose-50 px-3 py-2 text-xs font-medium text-rose-600 transition hover:bg-rose-100"
+                      className="ui-btn ui-btn--ghost flex-1"
                     >
                       Quitar
                     </button>

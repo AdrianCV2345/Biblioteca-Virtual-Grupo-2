@@ -26,11 +26,22 @@ export function getFavorites(): FavoriteBook[] {
 			return [];
 		}
 
-		const parsedFavorites = JSON.parse(rawFavorites);
-		return Array.isArray(parsedFavorites) ? parsedFavorites : [];
+				const parsedFavorites = JSON.parse(rawFavorites);
+				if (!Array.isArray(parsedFavorites)) return [];
+				// Normalize any legacy entries to ensure workId is the raw id (no '/works/' prefix)
+				return parsedFavorites.map((f: any) => ({
+					...f,
+					workId: normalizeWorkId(f.workId || f.workId),
+					openLibraryUrl: f.openLibraryUrl || `https://openlibrary.org/works/${normalizeWorkId(f.workId)}`,
+				}));
 	} catch {
 		return [];
 	}
+}
+
+function normalizeWorkId(id: string) {
+	if (!id) return "";
+	return id.replace(/^\/?works\//, "");
 }
 
 export function saveFavorites(favorites: FavoriteBook[]) {
@@ -42,7 +53,8 @@ export function saveFavorites(favorites: FavoriteBook[]) {
 }
 
 export function isFavorite(workId: string): boolean {
-	return getFavorites().some((favorite) => favorite.workId === workId);
+	const normalized = normalizeWorkId(workId);
+	return getFavorites().some((favorite) => normalizeWorkId(favorite.workId) === normalized);
 }
 
 interface BookInput {
@@ -56,16 +68,17 @@ interface BookInput {
 export function addToFavorites(book: BookInput): void {
 	if (!canUseStorage()) return;
 	const favorites = getFavorites();
-	if (favorites.some((f) => f.workId === book.key)) return;
-	const favorite: FavoriteBook = {
-		workId: book.key,
+		const normalized = normalizeWorkId(book.key);
+		if (favorites.some((f) => normalizeWorkId(f.workId) === normalized)) return;
+		const favorite: FavoriteBook = {
+				workId: normalized,
 		title: book.title,
 		coverUrl: book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : "",
 		authors: book.author_name || [],
 		year: book.first_publish_year?.toString() || "",
 		description: "",
 		subjects: [],
-		openLibraryUrl: `https://openlibrary.org${book.key}`,
+			openLibraryUrl: `https://openlibrary.org/works/${normalized}`,
 	};
 	favorites.unshift(favorite);
 	saveFavorites(favorites);
@@ -73,14 +86,16 @@ export function addToFavorites(book: BookInput): void {
 
 export function removeFromFavorites(bookKey: string): void {
 	if (!canUseStorage()) return;
-	saveFavorites(getFavorites().filter((f) => f.workId !== bookKey));
+	const normalized = normalizeWorkId(bookKey);
+	saveFavorites(getFavorites().filter((f) => normalizeWorkId(f.workId) !== normalized));
 }
 
 export const removeFavorite = removeFromFavorites;
 
 export function toggleFavorite(book: FavoriteBook): boolean {
 	const favorites = getFavorites();
-	const existingIndex = favorites.findIndex((favorite) => favorite.workId === book.workId);
+	const normalized = normalizeWorkId(book.workId);
+	const existingIndex = favorites.findIndex((favorite) => normalizeWorkId(favorite.workId) === normalized);
 
 	if (existingIndex >= 0) {
 		favorites.splice(existingIndex, 1);
@@ -88,7 +103,9 @@ export function toggleFavorite(book: FavoriteBook): boolean {
 		return false;
 	}
 
-	favorites.unshift(book);
+	// ensure stored workId is normalized
+	const toStore = { ...book, workId: normalized };
+	favorites.unshift(toStore);
 	saveFavorites(favorites);
 	return true;
 }

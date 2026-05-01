@@ -148,20 +148,16 @@ export default function BookDetail({ workId }: BookDetailProps) {
           <div className="flex gap-4">
             <button
               onClick={handleToggleFavorite}
-              className={`px-6 py-3 rounded-lg text-white transition-colors ${
-                isFav
-                  ? 'bg-red-500 hover:bg-red-600'
-                  : 'bg-green-500 hover:bg-green-600'
-              }`}
+              className={`ui-btn ${isFav ? 'ui-btn--ghost' : 'ui-btn--primary'}`}
             >
-              {isFav ? '❤️ Quitar de favoritos' : '🤍 Agregar a favoritos'}
+              {isFav ? 'Quitar de favoritos' : 'Agregar a favoritos'}
             </button>
             {book.key && (
               <a
                 href={`https://openlibrary.org${book.key}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors inline-flex items-center gap-2"
+                className="ui-btn ui-btn--ghost inline-flex items-center gap-2"
               >
                 Ver en Open Library
                 <svg
