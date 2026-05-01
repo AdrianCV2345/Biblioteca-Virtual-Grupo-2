@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import FilterPanel from "@/components/FilterPanel";
@@ -64,8 +66,8 @@ async function doSearch(query: string, type: string, pageNum: number) {
 
       const response = await searchBooks(params);
 
-      setResults(response.docs);
-      setTotalResults(response.numFound);
+      setResults(response.books);
+      setTotalResults(response.totalResults);
       setSearchTriggered(true);
     } catch (err: any) {
       setError(err.message || "Error al buscar libros");
