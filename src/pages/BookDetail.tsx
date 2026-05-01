@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getBookDetail, getCoverUrl } from '../services/openLibraryService';
-import { addToFavorites, removeFromFavorites, isFavorite } from '../utils/storage';
+import { removeFromFavorites, isFavorite, toggleFavorite, FavoriteBook } from '../utils/storage';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -45,12 +45,24 @@ export default function BookDetail({ workId }: BookDetailProps) {
       removeFromFavorites(book.key);
       setIsFav(false);
     } else {
-      addToFavorites({
-        key: book.key,
+      const coverUrl = book.covers?.[0]
+        ? getCoverUrl(book.covers[0])
+        : '';
+      const favorite: FavoriteBook = {
+        workId: book.key,
         title: book.title,
-        cover_i: book.covers?.[0],
-        first_publish_year: book.first_publish_date ? parseInt(book.first_publish_date) : undefined,
-      });
+        coverUrl,
+        authors: (book.authors ?? []).map((a: any) =>
+          a.author?.key ? a.author.key.split('/').pop() : 'Desconocido'
+        ),
+        year: book.first_publish_date ?? '',
+        description: typeof book.description === 'string'
+          ? book.description
+          : (book.description?.value ?? ''),
+        subjects: (book.subjects ?? []).slice(0, 10),
+        openLibraryUrl: `https://openlibrary.org${book.key}`,
+      };
+      toggleFavorite(favorite);
       setIsFav(true);
     }
   };
