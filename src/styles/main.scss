@@ -29,6 +29,25 @@
 	}
 }
 
+/* Manual theme override when toggled by JS */
+[data-theme="dark"] {
+  --ui-bg: #0f1728;
+  --ui-surface: #1a2438;
+  --ui-surface-soft: #22304b;
+  --ui-text: #e8eefc;
+  --ui-text-muted: #aebbd8;
+  --ui-primary: #5a8bff;
+  --ui-primary-strong: #80a5ff;
+  --ui-border: #344766;
+  --ui-danger: #ff7a9d;
+  --ui-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Smooth theme transitions */
+body {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
 html,
 body {
 	min-height: 100%;
