@@ -76,6 +76,8 @@ export function removeFromFavorites(bookKey: string): void {
 	saveFavorites(getFavorites().filter((f) => f.workId !== bookKey));
 }
 
+export const removeFavorite = removeFromFavorites;
+
 export function toggleFavorite(book: FavoriteBook): boolean {
 	const favorites = getFavorites();
 	const existingIndex = favorites.findIndex((favorite) => favorite.workId === book.workId);
