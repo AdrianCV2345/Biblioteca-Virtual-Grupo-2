@@ -6,6 +6,7 @@ import { getBookDetail, getCoverUrl } from '../services/openLibraryService';
 import { removeFromFavorites, isFavorite, toggleFavorite, FavoriteBook } from '../utils/storage';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
+import styles from './BookDetail.module.scss';
 
 interface BookDetailProps {
   workId?: string;
@@ -45,9 +46,7 @@ export default function BookDetail({ workId }: BookDetailProps) {
       removeFromFavorites(book.key);
       setIsFav(false);
     } else {
-      const coverUrl = book.covers?.[0]
-        ? getCoverUrl(book.covers[0])
-        : '';
+      const coverUrl = book.covers?.[0] ? getCoverUrl(book.covers[0]) : '';
       const favorite: FavoriteBook = {
         workId: book.key,
         title: book.title,
@@ -68,22 +67,15 @@ export default function BookDetail({ workId }: BookDetailProps) {
   };
 
   const handleRetry = () => {
-    if (workId) {
-      fetchBookDetails(workId);
-    }
+    if (workId) fetchBookDetails(workId);
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <ErrorMessage message={error} onRetry={handleRetry} />;
-  }
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage message={error} onRetry={handleRetry} />;
 
   if (!book) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className={styles.notFound}>
         <div className="text-lg">Libro no encontrado</div>
       </div>
     );
@@ -92,36 +84,40 @@ export default function BookDetail({ workId }: BookDetailProps) {
   const coverUrl = book.covers ? getCoverUrl(book.covers[0]) : '/placeholder-book.jpg';
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <button
-        onClick={() => router.back()}
-        className="mb-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
-      >
+    <div className={styles.pageWrapper}>
+      <button onClick={() => router.back()} className={styles.backBtn}>
         ← Volver
       </button>
-      <div className="flex flex-col md:flex-row gap-8">
+
+      <div className={styles.layout}>
         <div className="flex-shrink-0">
           <img
             src={coverUrl}
             alt={`Cover of ${book.title}`}
-            className="object-cover rounded shadow-lg w-80 h-96"
+            className={styles.cover}
             onError={(e) => {
               (e.target as HTMLImageElement).src = '/placeholder-book.jpg';
             }}
           />
         </div>
-        <div className="flex-1">
+
+        <div className={styles.info}>
           <h1 className="text-4xl font-bold mb-4">{book.title}</h1>
+
           {book.authors && (
-            <p className="text-xl text-gray-600 mb-4">
-              Autor: {book.authors.map((author: any) => author.author?.key ? author.author.key.split('/').pop() : 'Desconocido').join(', ')}
+            <p className={styles.authors}>
+              Autor: {book.authors.map((author: any) =>
+                author.author?.key ? author.author.key.split('/').pop() : 'Desconocido'
+              ).join(', ')}
             </p>
           )}
+
           {book.first_publish_date && (
-            <p className="text-lg text-gray-600 mb-4">
+            <p className={styles.publishDate}>
               Primera publicación: {book.first_publish_date}
             </p>
           )}
+
           {book.description && (
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-2">Descripción</h2>
@@ -130,22 +126,19 @@ export default function BookDetail({ workId }: BookDetailProps) {
               </p>
             </div>
           )}
+
           {book.subjects && book.subjects.length > 0 && (
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-2">Temas</h2>
-              <div className="flex flex-wrap gap-2">
+              <div className={styles.subjects}>
                 {book.subjects.slice(0, 10).map((subject: string, index: number) => (
-                  <span
-                    key={index}
-                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
-                  >
-                    {subject}
-                  </span>
+                  <span key={index} className={styles.subjectBadge}>{subject}</span>
                 ))}
               </div>
             </div>
           )}
-          <div className="flex gap-4">
+
+          <div className={styles.actions}>
             <button
               onClick={handleToggleFavorite}
               className={`ui-btn ${isFav ? 'ui-btn--ghost' : 'ui-btn--primary'}`}
@@ -160,18 +153,8 @@ export default function BookDetail({ workId }: BookDetailProps) {
                 className="ui-btn ui-btn--ghost inline-flex items-center gap-2"
               >
                 Ver en Open Library
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
             )}

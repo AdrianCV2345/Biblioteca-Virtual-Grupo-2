@@ -7,6 +7,7 @@ import { addToFavorites, removeFromFavorites } from '../utils/storage';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import BookCard from '../components/BookCard';
+import styles from './Home.module.scss';
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -63,29 +64,27 @@ export default function Home() {
 
   if (books.length === 0) {
     return (
-      <div className="flex justify-center items-center py-12">
-        <div className="text-center">
-          <p className="text-xl text-gray-600 mb-4">No se encontraron libros.</p>
-          <button
-            onClick={() => router.push('/buscar')}
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-          >
-            Ir a buscar
-          </button>
-        </div>
+      <div className={styles.emptyState}>
+        <p className="text-xl text-gray-600 mb-4">No se encontraron libros.</p>
+        <button
+          onClick={() => router.push('/buscar')}
+          className="ui-btn ui-btn--primary"
+        >
+          Ir a buscar
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <header className="mb-8 text-center">
+    <div className={styles.pageWrapper}>
+      <header className={styles.header}>
         <p className="ui-kicker">Explora</p>
         <h1 className="text-3xl font-bold">Biblioteca Virtual</h1>
         <p className="text-sm text-gray-600 mt-2">Descubre libros populares y guarda tus favoritos</p>
       </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+      <section className={styles.bookGrid}>
         {books.map((book) => (
           <BookCard
             key={book.key}
@@ -97,7 +96,7 @@ export default function Home() {
         ))}
       </section>
 
-      <div className="flex justify-center items-center gap-4 mt-8 ui-pagination">
+      <div className={`${styles.pagination} ui-pagination`}>
         <button
           onClick={() => setCurrentPage((p) => p - 1)}
           disabled={currentPage === 1}

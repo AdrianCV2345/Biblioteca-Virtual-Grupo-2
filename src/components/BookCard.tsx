@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Book, getCoverUrl } from '../services/openLibraryService';
 import { addToFavorites, removeFromFavorites, isFavorite as checkIsFavorite } from '../utils/storage';
+import styles from './BookCard.module.scss';
 
 interface BookCardProps {
   book: Book;
@@ -40,11 +41,11 @@ export default function BookCard({
   };
 
   return (
-    <article className="book-card ui-enter relative">
+    <article className={`${styles.bookCard} ui-enter relative`}>
       <img
         src={coverUrl}
         alt={`Cover of ${book.title}`}
-        className="book-card__cover"
+        className={styles.cover}
         onError={(e) => {
           (e.target as HTMLImageElement).src = '/placeholder-book.jpg';
         }}
@@ -72,13 +73,13 @@ export default function BookCard({
         </svg>
       </button>
 
-      <div className="book-card__body">
-        <h3 className="book-card__title line-clamp-2">{book.title}</h3>
-        <p className="book-card__meta">Autor: {book.author_name ? book.author_name.join(', ') : 'Desconocido'}</p>
-        <p className="book-card__meta">Año: {book.first_publish_year || 'Desconocido'}</p>
-        <p className="book-card__meta">Ediciones: {book.edition_count || 'Desconocido'}</p>
+      <div className={styles.body}>
+        <h3 className={`${styles.title} line-clamp-2`}>{book.title}</h3>
+        <p className={styles.meta}>Autor: {book.author_name ? book.author_name.join(', ') : 'Desconocido'}</p>
+        <p className={styles.meta}>Año: {book.first_publish_year || 'Desconocido'}</p>
+        <p className={styles.meta}>Ediciones: {book.edition_count || 'Desconocido'}</p>
 
-        <div className="book-card__actions">
+        <div className={styles.actions}>
           <button onClick={() => onViewDetail(book)} className="ui-btn ui-btn--ghost flex-1">Ver detalle</button>
           <button onClick={handleFavoriteClick} className={`ui-btn ${isFav ? 'ui-btn--primary' : 'ui-btn--ghost'} flex-1`}> {isFav ? 'Favorito' : 'Agregar'}</button>
         </div>

@@ -1,0 +1,26 @@
+.pageWrapper {
+  margin-inline: auto;
+  padding: 2rem 1rem;
+}
+
+.content {
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: var(--ui-text-muted);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.list {
+  list-style: disc;
+  list-style-position: inside;
+  color: var(--ui-text-muted);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

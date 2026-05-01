@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import styles from "./FilterPanel.module.scss";
 
 interface FilterPanelProps {
   onFilterChange: (filters: FilterOptions) => void;
@@ -59,19 +60,19 @@ export default function FilterPanel({ onFilterChange }: FilterPanelProps) {
       <div className="flex items-center justify-between">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="filter-toggle ui-btn ui-btn--ghost"
+          className={`${styles.filterToggle} ui-btn ui-btn--ghost`}
           aria-expanded={isOpen}
           aria-controls="filter-panel"
         >
           {isOpen ? "Cerrar filtros" : "Abrir filtros"}
         </button>
 
-        <div className="filter-summary">{language || author || minYear || maxYear ? 'Filtros activos' : 'Sin filtros'}</div>
+        <div className={styles.filterSummary}>{language || author || minYear || maxYear ? 'Filtros activos' : 'Sin filtros'}</div>
       </div>
 
       {isOpen && (
-        <div id="filter-panel" className="mt-3 filter-panel-card">
-          <div className="filter-grid">
+        <div id="filter-panel" className={`mt-3 ${styles.filterPanelCard}`}>
+          <div className={styles.filterGrid}>
             <div>
               <label htmlFor="minYear" className="block text-sm font-medium text-gray-700 mb-1">Año mínimo</label>
               <input id="minYear" type="number" value={minYear} onChange={(e) => setMinYear(e.target.value)} placeholder="Ej: 1900" className="ui-input w-full" />
@@ -106,7 +107,7 @@ export default function FilterPanel({ onFilterChange }: FilterPanelProps) {
             </div>
           </div>
 
-          <div className="filter-actions">
+          <div className={styles.filterActions}>
             <button onClick={handleClear} className="ui-btn ui-btn--ghost">Limpiar</button>
             <button onClick={applyFilters} className="ui-btn ui-btn--primary">Aplicar</button>
           </div>

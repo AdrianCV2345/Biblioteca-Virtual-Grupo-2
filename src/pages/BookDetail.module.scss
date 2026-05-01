@@ -1,0 +1,81 @@
+.pageWrapper {
+  margin-inline: auto;
+  padding: 2rem 1rem;
+}
+
+.backBtn {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--ui-surface-soft);
+  color: var(--ui-text);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  transition: background 180ms ease;
+
+  &:hover {
+    background: var(--ui-surface);
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.cover {
+  flex-shrink: 0;
+  width: 20rem;
+  height: 24rem;
+  object-fit: cover;
+  border-radius: var(--ui-radius);
+  box-shadow: var(--ui-shadow);
+}
+
+.info {
+  flex: 1;
+}
+
+.authors {
+  font-size: 1.25rem;
+  color: var(--ui-text-muted);
+  margin-bottom: 1rem;
+}
+
+.publishDate {
+  font-size: 1.125rem;
+  color: var(--ui-text-muted);
+  margin-bottom: 1rem;
+}
+
+.subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.subjectBadge {
+  background: color-mix(in srgb, var(--ui-primary) 12%, var(--ui-surface));
+  color: var(--ui-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: var(--ui-text-muted);
+}

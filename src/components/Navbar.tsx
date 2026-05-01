@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getFavorites } from '../utils/storage';
+import styles from './Navbar.module.scss';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -119,7 +120,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={() => setOpen(true)}
-              className="ui-btn ui-btn--ghost mobile-only"
+              className={`ui-btn ui-btn--ghost ${styles.mobileOnly}`}
               aria-label="Abrir menú"
               aria-expanded={open}
             >
@@ -131,7 +132,7 @@ export default function Navbar() {
               onClick={toggleTheme}
               aria-pressed={theme === 'dark'}
               title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-              className="ui-btn ui-btn--ghost mobile-only"
+              className={`ui-btn ui-btn--ghost ${styles.mobileOnly}`}
             >
               {theme === 'dark' ? (
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -149,16 +150,16 @@ export default function Navbar() {
       </div>
 
       {/* Mobile slide-over */}
-      <div className={`mobile-nav-backdrop ${open ? 'is-open' : ''}`} onClick={() => setOpen(false)} />
-      <aside className={`mobile-nav-panel ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+      <div className={`${styles.mobileNavBackdrop} ${open ? styles.isOpen : ''}`} onClick={() => setOpen(false)} />
+      <aside className={`${styles.mobileNavPanel} ${open ? styles.isOpen : ''}`} aria-hidden={!open}>
         <div className="flex items-center gap-2">
           <h3 className="text-lg font-semibold">Navegación</h3>
-          <button className="ui-btn ui-btn--ghost mobile-nav-close" onClick={() => setOpen(false)} aria-label="Cerrar menú">
+          <button className={`ui-btn ui-btn--ghost ${styles.mobileNavClose}`} onClick={() => setOpen(false)} aria-label="Cerrar menú">
             ✕
           </button>
         </div>
 
-        <nav className="mobile-nav-links" onClick={() => setOpen(false)}>
+        <nav className={styles.mobileNavLinks} onClick={() => setOpen(false)}>
           <Link href="/" className="ui-btn ui-btn--ghost">Inicio</Link>
           <Link href="/buscar" className="ui-btn ui-btn--ghost">Buscar</Link>
           <Link href="/favoritos" className="ui-btn ui-btn--ghost">Favoritos</Link>

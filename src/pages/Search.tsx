@@ -4,6 +4,7 @@ import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import FilterPanel from "@/components/FilterPanel";
 import { searchBooks, getCoverUrl, OpenLibraryBook } from "@/services/openLibraryService";
+import styles from "./Search.module.scss";
 
 interface FilterOptions {
   minYear: string;
@@ -31,7 +32,8 @@ export default function SearchPage() {
     author: "",
     sortBy: "",
   });
-async function doSearch(query: string, type: string, pageNum: number) {
+
+  async function doSearch(query: string, type: string, pageNum: number) {
     setLoading(true);
     setError(null);
 
@@ -48,24 +50,13 @@ async function doSearch(query: string, type: string, pageNum: number) {
         params.q = query;
       }
 
-      if (filters.minYear) {
-        params.minYear = parseInt(filters.minYear);
-      }
-      if (filters.maxYear) {
-        params.maxYear = parseInt(filters.maxYear);
-      }
-      if (filters.language) {
-        params.language = filters.language;
-      }
-      if (filters.author && type !== "author") {
-        params.author = filters.author;
-      }
-      if (filters.sortBy) {
-        params.sort = filters.sortBy;
-      }
+      if (filters.minYear) params.minYear = parseInt(filters.minYear);
+      if (filters.maxYear) params.maxYear = parseInt(filters.maxYear);
+      if (filters.language) params.language = filters.language;
+      if (filters.author && type !== "author") params.author = filters.author;
+      if (filters.sortBy) params.sort = filters.sortBy;
 
       const response = await searchBooks(params);
-
       setResults(response.books);
       setTotalResults(response.totalResults);
       setSearchTriggered(true);
@@ -76,14 +67,15 @@ async function doSearch(query: string, type: string, pageNum: number) {
       setLoading(false);
     }
   }
-   function handleSearch(query: string, type: string) {
+
+  function handleSearch(query: string, type: string) {
     setCurrentQuery(query);
     setCurrentType(type);
     setPage(1);
     doSearch(query, type, 1);
   }
 
-    function handleFilterChange(newFilters: FilterOptions) {
+  function handleFilterChange(newFilters: FilterOptions) {
     setFilters(newFilters);
     if (currentQuery) {
       doSearch(currentQuery, currentType, 1);
@@ -91,38 +83,37 @@ async function doSearch(query: string, type: string, pageNum: number) {
     }
   }
 
-    function handlePageChange(newPage: number) {
+  function handlePageChange(newPage: number) {
     setPage(newPage);
     doSearch(currentQuery, currentType, newPage);
     window.scrollTo({ top: 0 });
-  }  
+  }
+
   const totalPages = Math.ceil(totalResults / 20);
 
-   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-          Buscar Libros
-        </h1>
+  return (
+    <div className={styles.pageWrapper}>
+      <div className={styles.inner}>
+        <h1 className="text-3xl font-bold mb-6">Buscar Libros</h1>
 
-        <div className="mb-6 space-y-4">
+        <div className={styles.searchSection}>
           <SearchBar onSearch={handleSearch} />
           <FilterPanel onFilterChange={handleFilterChange} />
         </div>
 
         {loading && (
-          <div className="flex items-center justify-center py-16">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-            <span className="ml-3 text-gray-600 dark:text-gray-400">Cargando...</span>
+          <div className={styles.loadingBox}>
+            <div className={styles.spinner} />
+            <span>Cargando...</span>
           </div>
         )}
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-center">
-            <p className="text-red-600 dark:text-red-400">{error}</p>
+          <div className={styles.errorBox}>
+            <p>{error}</p>
             <button
               onClick={() => doSearch(currentQuery, currentType, page)}
-              className="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
+              className="mt-2 ui-btn ui-btn--primary text-sm"
             >
               Reintentar
             </button>
@@ -130,11 +121,9 @@ async function doSearch(query: string, type: string, pageNum: number) {
         )}
 
         {!loading && !error && !searchTriggered && (
-          <div className="text-center py-16">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-              Busca libros en nuestra biblioteca
-            </h3>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+          <div className={styles.emptyPrompt}>
+            <h3 className="text-lg font-medium">Busca libros en nuestra biblioteca</h3>
+            <p className="mt-2 text-sm">
               Usa la barra de búsqueda para encontrar libros por título, autor o tema.
             </p>
           </div>
@@ -142,30 +131,24 @@ async function doSearch(query: string, type: string, pageNum: number) {
 
         {!loading && !error && searchTriggered && (
           <>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <p className={styles.resultsCount}>
               {totalResults.toLocaleString()} resultados encontrados
             </p>
 
             {results.length === 0 ? (
-              <div className="text-center py-12">
-                <h3 className="mt-2 text-lg font-medium text-gray-900 dark:text-white">
-                  No se encontraron resultados
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              <div className={styles.emptyPrompt}>
+                <h3 className="mt-2 text-lg font-medium">No se encontraron resultados</h3>
+                <p className="mt-1 text-sm">
                   Intenta con otros términos o cambia los filtros.
                 </p>
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className={styles.resultsGrid}>
                   {results.map((book) => {
                     const workId = book.key.replace("/works/", "");
                     return (
-                      <a
-                        key={book.key}
-                        href={`/libro/${workId}`}
-                        className="block bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
-                      >
+                      <a key={book.key} href={`/libro/${workId}`} className={styles.bookCard}>
                         {book.cover_i ? (
                           <img
                             src={getCoverUrl(book.cover_i)}
@@ -173,26 +156,20 @@ async function doSearch(query: string, type: string, pageNum: number) {
                             className="w-full h-48 object-cover"
                           />
                         ) : (
-                          <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                            <span className="text-gray-400 text-sm">Sin portada</span>
+                          <div className={styles.bookCoverPlaceholder}>
+                            Sin portada
                           </div>
                         )}
-                        <div className="p-4">
-                          <h3 className="font-semibold text-gray-900 dark:text-white truncate">
-                            {book.title}
-                          </h3>
+                        <div className={styles.bookCardBody}>
+                          <h3 className={styles.bookTitle}>{book.title}</h3>
                           {book.author_name && book.author_name.length > 0 && (
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 truncate">
+                            <p className="text-sm text-gray-600 mt-1 truncate">
                               {book.author_name[0]}
                             </p>
                           )}
-                          <div className="flex justify-between mt-2 text-xs text-gray-500">
-                            {book.first_publish_year && (
-                              <span>{book.first_publish_year}</span>
-                            )}
-                            {book.edition_count && (
-                              <span>{book.edition_count} ed.</span>
-                            )}
+                          <div className={styles.bookMeta}>
+                            {book.first_publish_year && <span>{book.first_publish_year}</span>}
+                            {book.edition_count && <span>{book.edition_count} ed.</span>}
                           </div>
                         </div>
                       </a>
@@ -200,25 +177,22 @@ async function doSearch(query: string, type: string, pageNum: number) {
                   })}
                 </div>
 
-              
                 {totalPages > 1 && (
-                  <div className="mt-8 flex justify-center items-center gap-2">
+                  <div className={styles.pagination}>
                     <button
                       onClick={() => handlePageChange(page - 1)}
                       disabled={page <= 1}
-                      className="px-4 py-2 text-sm bg-white dark:bg-gray-800 border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="ui-btn ui-btn--ghost"
                     >
                       Anterior
                     </button>
-
                     <span className="px-4 py-2 text-sm">
                       Página {page} de {totalPages}
                     </span>
-
                     <button
                       onClick={() => handlePageChange(page + 1)}
                       disabled={page >= totalPages}
-                      className="px-4 py-2 text-sm bg-white dark:bg-gray-800 border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="ui-btn ui-btn--ghost"
                     >
                       Siguiente
                     </button>
@@ -231,6 +205,4 @@ async function doSearch(query: string, type: string, pageNum: number) {
       </div>
     </div>
   );
-
-
 }

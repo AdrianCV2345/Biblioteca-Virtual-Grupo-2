@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getFavorites, removeFavorite, FavoriteBook } from "@/utils/storage";
+import styles from "./Favorites.module.scss";
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<FavoriteBook[]>([]);
@@ -30,10 +31,10 @@ export default function FavoritesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 px-4 py-10 text-stone-900">
-        <div className="mx-auto max-w-6xl rounded-3xl border border-stone-200 bg-white/80 p-8 shadow-sm backdrop-blur">
-          <p className="text-sm uppercase tracking-[0.3em] text-stone-500">Cargando favoritos</p>
-          <div className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className={styles.pageWrapper}>
+        <div className={styles.inner}>
+          <p className="ui-kicker">Cargando favoritos</p>
+          <div className={styles.grid} style={{ marginTop: "1rem" }}>
             {[...Array(3)].map((_, i) => (
               <div key={i} className="h-96 animate-pulse rounded-3xl bg-stone-200" />
             ))}
@@ -44,71 +45,48 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-stone-100 px-4 py-8 text-stone-900 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="mb-8 flex items-center gap-4">
-          <Link
-            href="/buscar"
-            className="inline-flex items-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-medium text-stone-900 transition hover:border-stone-900 hover:bg-stone-900 hover:text-white"
-          >
+    <div className={styles.pageWrapper}>
+      <div className={styles.inner}>
+        <div className={styles.header}>
+          <Link href="/buscar" className={styles.backLink}>
             ← Volver
           </Link>
-          <h1 className="text-3xl font-bold"> Mis Favoritos</h1>
+          <h1 className="text-3xl font-bold">Mis Favoritos</h1>
           {favorites.length > 0 && (
-            <span className="ml-auto rounded-full bg-rose-100 px-3 py-1 text-sm font-medium text-rose-700">
+            <span className={styles.countBadge}>
               {favorites.length} libro{favorites.length !== 1 ? "s" : ""}
             </span>
           )}
         </div>
 
-        {/* Empty State */}
         {favorites.length === 0 ? (
-          <div className="rounded-3xl border border-stone-200 bg-white p-12 text-center shadow-sm">
+          <div className={styles.emptyState}>
             <p className="text-4xl mb-4"></p>
-            <h2 className="text-2xl font-semibold text-stone-900 mb-2">
-              Sin favoritos aún
-            </h2>
+            <h2 className="text-2xl font-semibold mb-2">Sin favoritos aún</h2>
             <p className="text-stone-600 mb-6">
               Busca libros y agrega tus favoritos para verlos aquí
             </p>
-            <Link
-              href="/buscar"
-              className="inline-block rounded-full bg-stone-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-stone-800"
-            >
+            <Link href="/buscar" className="ui-btn ui-btn--primary">
               Buscar libros
             </Link>
           </div>
         ) : (
-          /* Grid de Favoritos */
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className={styles.grid}>
             {favorites.map((book) => (
-              <div
-                key={book.workId}
-                className="group overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition hover:shadow-lg"
-              >
-                {/* Portada */}
-                <div className="relative h-64 overflow-hidden bg-stone-100">
+              <div key={book.workId} className={styles.card}>
+                <div className={styles.coverArea}>
                   {book.coverUrl ? (
-                    <img
-                      src={book.coverUrl}
-                      alt={book.title}
-                      className="h-full w-full object-cover transition group-hover:scale-105"
-                    />
+                    <img src={book.coverUrl} alt={book.title} className={styles.coverImg} />
                   ) : (
-                    <div className="flex h-full items-center justify-center bg-stone-200">
-                      <span className="text-4xl"></span>
+                    <div className={styles.coverPlaceholder}>
+                      <span></span>
                     </div>
                   )}
                 </div>
 
-                {/* Contenido */}
-                <div className="p-4">
-                  <Link
-                    href={`/libro/${book.workId}`}
-                    className="block group/title"
-                  >
-                    <h3 className="font-semibold text-stone-900 line-clamp-2 group-hover/title:text-rose-600 transition">
+                <div className={styles.cardBody}>
+                  <Link href={`/libro/${book.workId}`} className="block group/title">
+                    <h3 className="font-semibold line-clamp-2 hover:text-rose-600 transition">
                       {book.title}
                     </h3>
                   </Link>
@@ -120,15 +98,11 @@ export default function FavoritesPage() {
                   )}
 
                   {book.year && (
-                    <p className="text-xs text-stone-500 mt-1"> {book.year}</p>
+                    <p className="text-xs text-stone-500 mt-1">{book.year}</p>
                   )}
 
-                  {/* Botones */}
-                  <div className="mt-4 flex gap-2">
-                    <Link
-                      href={`/libro/${book.workId}`}
-                      className="ui-btn ui-btn--primary flex-1 text-center"
-                    >
+                  <div className={styles.cardActions}>
+                    <Link href={`/libro/${book.workId}`} className="ui-btn ui-btn--primary flex-1 text-center">
                       Ver detalle
                     </Link>
                     <button
