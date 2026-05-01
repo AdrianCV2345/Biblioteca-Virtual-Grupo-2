@@ -22,11 +22,13 @@ export default function Navbar() {
       const saved = localStorage.getItem('theme');
       if (saved === 'dark' || saved === 'light') {
         setTheme(saved as 'light' | 'dark');
-        if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-        else document.documentElement.removeAttribute('data-theme');
+        document.documentElement.setAttribute('data-theme', saved);
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         setTheme('dark');
         document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        setTheme('light');
+        document.documentElement.setAttribute('data-theme', 'light');
       }
     } catch (e) {
       // ignore if storage not available
@@ -37,8 +39,7 @@ export default function Navbar() {
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     try {
-      if (next === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-      else document.documentElement.removeAttribute('data-theme');
+      document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     } catch (e) {}
   };

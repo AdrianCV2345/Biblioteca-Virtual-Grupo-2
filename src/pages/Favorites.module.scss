@@ -1,6 +1,6 @@
 .pageWrapper {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #fffbeb, #fff, #f5f5f4);
+  background: var(--ui-bg);
   padding: 2.5rem 1rem;
   color: var(--ui-text);
 
@@ -29,38 +29,38 @@
   display: inline-flex;
   align-items: center;
   border-radius: 9999px;
-  border: 1px solid #d4d4ab;
-  background: #fff;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
   padding: 0.625rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #1c1917;
+  color: var(--ui-text);
   transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
 
   &:hover {
-    background: #1c1917;
-    border-color: #1c1917;
-    color: #fff;
+    background: var(--ui-text);
+    border-color: var(--ui-text);
+    color: var(--ui-surface);
   }
 }
 
 .countBadge {
   margin-left: auto;
   border-radius: 9999px;
-  background: #ffe4e6;
+  background: color-mix(in srgb, var(--ui-danger) 12%, var(--ui-surface));
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #be123c;
+  color: var(--ui-danger);
 }
 
 .emptyState {
   border-radius: 1.5rem;
-  border: 1px solid #e7e5e4;
-  background: #fff;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
   padding: 3rem;
   text-align: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--ui-shadow);
 }
 
 .grid {
@@ -79,13 +79,13 @@
 .card {
   overflow: hidden;
   border-radius: 1.5rem;
-  border: 1px solid #e7e5e4;
-  background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
   transition: box-shadow 220ms ease;
 
   &:hover {
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -93,7 +93,7 @@
   position: relative;
   height: 16rem;
   overflow: hidden;
-  background: #e7e5e4;
+  background: color-mix(in srgb, var(--ui-surface) 88%, var(--ui-border));
 }
 
 .coverImg {
@@ -112,7 +112,7 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  background: #d6d3d1;
+  background: color-mix(in srgb, var(--ui-surface) 86%, var(--ui-border));
   font-size: 2.25rem;
 }
 

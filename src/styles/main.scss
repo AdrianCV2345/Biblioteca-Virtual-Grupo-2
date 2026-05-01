@@ -12,6 +12,8 @@
 	--ui-danger: #d1274f;
 	--ui-shadow: 0 14px 38px rgba(20, 48, 94, 0.08);
 	--ui-radius: 14px;
+	--navbar-bg: linear-gradient(135deg, #1457ff 0%, #0d44ca 100%);
+	--navbar-text: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,10 +28,27 @@
 		--ui-border: #344766;
 		--ui-danger: #ff7a9d;
 		--ui-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+		--navbar-bg: linear-gradient(135deg, #0f1728 0%, #1a2438 100%);
+		--navbar-text: #e8eefc;
 	}
 }
 
 /* Manual theme override when toggled by JS */
+[data-theme="light"] {
+  --ui-bg: #f5f7fb;
+  --ui-surface: #ffffff;
+  --ui-surface-soft: #f9fbff;
+  --ui-text: #13223c;
+  --ui-text-muted: #4c5e80;
+  --ui-primary: #1457ff;
+  --ui-primary-strong: #0d44ca;
+  --ui-border: #d5def0;
+  --ui-danger: #d1274f;
+  --ui-shadow: 0 14px 38px rgba(20, 48, 94, 0.08);
+  --navbar-bg: linear-gradient(135deg, #1457ff 0%, #0d44ca 100%);
+  --navbar-text: #ffffff;
+}
+
 [data-theme="dark"] {
   --ui-bg: #0f1728;
   --ui-surface: #1a2438;
@@ -41,6 +60,8 @@
   --ui-border: #344766;
   --ui-danger: #ff7a9d;
   --ui-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  --navbar-bg: linear-gradient(135deg, #0f1728 0%, #1a2438 100%);
+  --navbar-text: #e8eefc;
 }
 
 /* Smooth theme transitions */
@@ -82,10 +103,11 @@ textarea {
 }
 
 .ui-panel {
-	background: color-mix(in srgb, var(--ui-surface) 92%, transparent);
+	background: var(--navbar-bg);
 	border: 1px solid var(--ui-border);
 	border-radius: var(--ui-radius);
 	box-shadow: var(--ui-shadow);
+	color: var(--navbar-text);
 }
 
 .ui-btn {
@@ -119,6 +141,16 @@ textarea {
 	background: var(--ui-surface-soft);
 }
 
+.ui-panel .ui-btn--ghost {
+	background: rgba(255, 255, 255, 0.15);
+	border-color: rgba(255, 255, 255, 0.2);
+	color: var(--navbar-text);
+}
+
+.ui-panel .ui-btn--ghost:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
+
 .ui-input,
 .ui-select {
 	border: 1px solid var(--ui-border);
@@ -137,6 +169,11 @@ textarea {
 	text-transform: uppercase;
 	font-weight: 600;
 	font-size: 0.72rem;
+}
+
+/* Navbar kicker override */
+.ui-panel .ui-kicker {
+	color: var(--navbar-text);
 }
 
 .ui-enter {
