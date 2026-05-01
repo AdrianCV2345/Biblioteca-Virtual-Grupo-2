@@ -43,3 +43,48 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.actionButton {
+  flex: 1;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--ui-primary), var(--ui-primary-strong));
+  box-shadow: 0 10px 22px rgba(20, 87, 255, 0.22);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(20, 87, 255, 0.3);
+    filter: saturate(1.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--ui-primary) 70%, white);
+    outline-offset: 2px;
+  }
+}
+
+.actionButtonSecondary {
+  flex: 1;
+  border: 1px solid color-mix(in srgb, var(--ui-primary) 40%, var(--ui-border));
+  border-radius: 9999px;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: var(--ui-primary-strong);
+  background: color-mix(in srgb, var(--ui-primary) 12%, var(--ui-surface));
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: color-mix(in srgb, var(--ui-primary) 18%, var(--ui-surface));
+    box-shadow: 0 12px 24px rgba(20, 87, 255, 0.16);
+  }
+
+  &:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--ui-primary) 70%, white);
+    outline-offset: 2px;
+  }
+}

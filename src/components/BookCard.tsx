@@ -80,8 +80,8 @@ export default function BookCard({
         <p className={styles.meta}>Ediciones: {book.edition_count || 'Desconocido'}</p>
 
         <div className={styles.actions}>
-          <button onClick={() => onViewDetail(book)} className="ui-btn ui-btn--ghost flex-1">Ver detalle</button>
-          <button onClick={handleFavoriteClick} className={`ui-btn ${isFav ? 'ui-btn--primary' : 'ui-btn--ghost'} flex-1`}> {isFav ? 'Favorito' : 'Agregar'}</button>
+          <button onClick={() => onViewDetail(book)} className={styles.actionButtonSecondary}>Ver detalle</button>
+          <button onClick={handleFavoriteClick} className={styles.actionButton}>{isFav ? 'Favorito' : 'Agregar'}</button>
         </div>
       </div>
     </article>
