@@ -1,10 +1,17 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getFavorites } from '../utils/storage';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [favCount, setFavCount] = useState(0);
+
+  useEffect(() => {
+    setFavCount(getFavorites().length);
+  }, [pathname]);
 
   return (
     <nav className="bg-blue-600 text-white shadow-lg">
@@ -32,11 +39,16 @@ export default function Navbar() {
             </Link>
             <Link
               href="/favoritos"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${
+              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium ${
                 pathname === '/favoritos' ? 'bg-blue-700' : 'hover:bg-blue-700'
               }`}
             >
               Favoritos
+              {favCount > 0 && (
+                <span className="rounded-full bg-rose-500 px-1.5 py-0.5 text-xs font-semibold leading-none text-white">
+                  {favCount}
+                </span>
+              )}
             </Link>
             <Link
               href="/acerca"
