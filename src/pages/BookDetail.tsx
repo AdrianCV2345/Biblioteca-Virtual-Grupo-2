@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getBookDetail, getCoverUrl } from '../services/openLibraryService';
-import { addToFavorites } from '../utils/storage';
+import { addToFavorites, removeFromFavorites, isFavorite } from '../utils/storage';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -15,6 +15,7 @@ export default function BookDetail({ workId }: BookDetailProps) {
   const [book, setBook] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isFav, setIsFav] = useState(false);
   const router = useRouter();
 
   const fetchBookDetails = async (id: string) => {
@@ -23,6 +24,7 @@ export default function BookDetail({ workId }: BookDetailProps) {
       setError(null);
       const data = await getBookDetail(id);
       setBook(data);
+      setIsFav(isFavorite(id));
     } catch (err) {
       setError('Error al cargar los detalles del libro. Por favor, intenta de nuevo.');
       console.error(err);
@@ -37,14 +39,20 @@ export default function BookDetail({ workId }: BookDetailProps) {
     }
   }, [workId]);
 
-  const handleAddToFavorites = () => {
+  const handleToggleFavorite = () => {
     if (!book) return;
-    addToFavorites({
-      key: book.key,
-      title: book.title,
-      cover_i: book.covers?.[0],
-      first_publish_year: book.first_publish_date ? parseInt(book.first_publish_date) : undefined,
-    });
+    if (isFav) {
+      removeFromFavorites(book.key);
+      setIsFav(false);
+    } else {
+      addToFavorites({
+        key: book.key,
+        title: book.title,
+        cover_i: book.covers?.[0],
+        first_publish_year: book.first_publish_date ? parseInt(book.first_publish_date) : undefined,
+      });
+      setIsFav(true);
+    }
   };
 
   const handleRetry = () => {
@@ -127,10 +135,14 @@ export default function BookDetail({ workId }: BookDetailProps) {
           )}
           <div className="flex gap-4">
             <button
-              onClick={handleAddToFavorites}
-              className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              onClick={handleToggleFavorite}
+              className={`px-6 py-3 rounded-lg text-white transition-colors ${
+                isFav
+                  ? 'bg-red-500 hover:bg-red-600'
+                  : 'bg-green-500 hover:bg-green-600'
+              }`}
             >
-              Agregar a favoritos
+              {isFav ? '❤️ Quitar de favoritos' : '🤍 Agregar a favoritos'}
             </button>
             {book.key && (
               <a
