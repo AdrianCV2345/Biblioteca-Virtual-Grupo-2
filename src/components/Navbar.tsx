@@ -14,47 +14,47 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
+    <nav className="sticky top-0 z-40">
+      <div className="ui-panel py-3">
+        <div className="container mx-auto px-4 flex items-center justify-between gap-4">
+          <Link href="/" className="text-xl font-bold ui-kicker">
             Biblioteca Virtual
           </Link>
-          <div className="flex space-x-4">
+
+          <div className="flex items-center gap-2">
             <Link
               href="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${
-                pathname === '/' ? 'bg-blue-700' : 'hover:bg-blue-700'
-              }`}
+              className={`ui-btn ui-btn--ghost text-sm ${pathname === '/' ? 'ui-btn--primary' : ''}`}
+              aria-current={pathname === '/' ? 'page' : undefined}
             >
               Inicio
             </Link>
+
             <Link
               href="/buscar"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${
-                pathname === '/buscar' ? 'bg-blue-700' : 'hover:bg-blue-700'
-              }`}
+              className={`ui-btn ui-btn--ghost text-sm ${pathname === '/buscar' ? 'ui-btn--primary' : ''}`}
+              aria-current={pathname === '/buscar' ? 'page' : undefined}
             >
               Buscar
             </Link>
+
             <Link
               href="/favoritos"
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium ${
-                pathname === '/favoritos' ? 'bg-blue-700' : 'hover:bg-blue-700'
-              }`}
+              className={`ui-btn ui-btn--ghost inline-flex items-center gap-2 text-sm ${pathname === '/favoritos' ? 'ui-btn--primary' : ''}`}
+              aria-current={pathname === '/favoritos' ? 'page' : undefined}
             >
               Favoritos
               {favCount > 0 && (
-                <span className="rounded-full bg-rose-500 px-1.5 py-0.5 text-xs font-semibold leading-none text-white">
+                <span className="rounded-full bg-rose-500 px-2 py-0.5 text-xs font-semibold leading-none text-white">
                   {favCount}
                 </span>
               )}
             </Link>
+
             <Link
               href="/acerca"
-              className={`px-3 py-2 rounded-md text-sm font-medium ${
-                pathname === '/acerca' ? 'bg-blue-700' : 'hover:bg-blue-700'
-              }`}
+              className={`ui-btn ui-btn--ghost text-sm ${pathname === '/acerca' ? 'ui-btn--primary' : ''}`}
+              aria-current={pathname === '/acerca' ? 'page' : undefined}
             >
               Acerca
             </Link>
