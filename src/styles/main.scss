@@ -110,6 +110,16 @@ textarea {
 	color: var(--navbar-text);
 }
 
+/* Navbar specific styles */
+nav .ui-panel {
+	border: none;
+	border-radius: 0;
+	box-shadow: 0 2px 8px rgba(20, 87, 255, 0.1);
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
 .ui-btn {
 	display: inline-flex;
 	align-items: center;

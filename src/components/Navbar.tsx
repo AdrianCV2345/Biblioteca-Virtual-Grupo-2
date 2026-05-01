@@ -53,9 +53,9 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <nav className="sticky top-0 z-40">
-      <div className="ui-panel py-3">
-        <div className="container mx-auto px-4 flex items-center justify-between gap-4">
+    <nav className="sticky top-0 z-40 w-full">
+      <div className="ui-panel">
+        <div className="container mx-auto px-4 flex items-center justify-between gap-4 py-3">
           <Link href="/" className="text-xl font-bold ui-kicker">
             Biblioteca Virtual
           </Link>
