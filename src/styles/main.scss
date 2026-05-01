@@ -134,3 +134,58 @@ textarea {
 		transform: translateY(0);
 	}
 }
+
+/* Mobile nav slide-over */
+.mobile-nav-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(4, 10, 20, 0.45);
+	backdrop-filter: blur(4px);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 220ms ease;
+}
+
+.mobile-nav-backdrop.is-open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.mobile-nav-panel {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100dvh;
+	width: min(92vw, 360px);
+	background: var(--ui-surface);
+	border-left: 1px solid var(--ui-border);
+	box-shadow: 0 24px 48px rgba(16, 32, 64, 0.18);
+	transform: translateX(110%);
+	transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease;
+	display: flex;
+	flex-direction: column;
+	padding: 1.25rem;
+	gap: 0.5rem;
+}
+
+.mobile-nav-panel.is-open {
+	transform: translateX(0);
+}
+
+.mobile-nav-close {
+	margin-left: auto;
+}
+
+.mobile-nav-links {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+}
+
+@media (min-width: 768px) {
+	/* ocultar elementos móviles en pantallas mayores */
+	.mobile-only {
+		display: none !important;
+	}
+}
