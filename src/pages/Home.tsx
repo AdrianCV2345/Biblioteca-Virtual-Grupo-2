@@ -79,8 +79,13 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Biblioteca Virtual</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+      <header className="mb-8 text-center">
+        <p className="ui-kicker">Explora</p>
+        <h1 className="text-3xl font-bold">Biblioteca Virtual</h1>
+        <p className="text-sm text-gray-600 mt-2">Descubre libros populares y guarda tus favoritos</p>
+      </header>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
         {books.map((book) => (
           <BookCard
             key={book.key}
@@ -90,31 +95,21 @@ export default function Home() {
             onRemoveFromFavorites={handleRemoveFromFavorites}
           />
         ))}
-      </div>
+      </section>
 
-      <div className="flex justify-center items-center gap-4 mt-8">
+      <div className="flex justify-center items-center gap-4 mt-8 ui-pagination">
         <button
           onClick={() => setCurrentPage((p) => p - 1)}
           disabled={currentPage === 1}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-            currentPage === 1
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          }`}
+          className={`ui-btn ${currentPage === 1 ? 'ui-btn--ghost opacity-50 cursor-not-allowed' : 'ui-btn--ghost ui-btn--primary'}`}
         >
           ← Anterior
         </button>
-        <span className="text-gray-700 font-medium">
-          Página {currentPage} de {totalPages}
-        </span>
+        <span className="text-gray-700 font-medium">Página {currentPage} de {totalPages}</span>
         <button
           onClick={() => setCurrentPage((p) => p + 1)}
           disabled={currentPage === totalPages}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-            currentPage === totalPages
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          }`}
+          className={`ui-btn ${currentPage === totalPages ? 'ui-btn--ghost opacity-50 cursor-not-allowed' : 'ui-btn--ghost ui-btn--primary'}`}
         >
           Siguiente →
         </button>
